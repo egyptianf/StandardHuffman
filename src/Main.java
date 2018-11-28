@@ -57,12 +57,12 @@ public class Main {
                 "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC" +
                 "UUUUUUUUUUUUUUUUUUUUUUUUUUU";
         */
-        String usrStream = "vvvvvvvvvvvvvvhhhhhhhhhhhhhhcxxx";
-        Huffman h = new Huffman();
-        h.parse(usrStream);
-        h.createTree();
-        ArrayList<codeword> list = new ArrayList<>();
-        list = h.compress();
+        String usrStream = "vvvvvvhhhhhhhhgsdsdsssssggahhhhhhcxxx";
+        Huffman huff = new Huffman();
+        huff.parse(usrStream);
+        huff.createTree();
+        ArrayList<codeword> list;
+        list = huff.compress();
         for(codeword c: list)
             c.print();
 
@@ -71,16 +71,19 @@ public class Main {
         int usrSize = usrStream.length();
         for(int i = 0; i < usrSize; i++)
         {
-            if(h.myTree.findCharInCodewords(usrStream.charAt(i)) != -1)
+            if(huff.myTree.findCharInCodewords(usrStream.charAt(i)) != -1)
             {//This char is found in the codewords array list
                 System.out.println(usrStream.charAt(i));
-                text+=list.get(h.myTree.findCharInCodewords(usrStream.charAt(i))).code;
+                text+=list.get(huff.myTree.findCharInCodewords(usrStream.charAt(i))).code;
             }
 
         }
         HuffmanFiles hf = new HuffmanFiles();
         hf.setBits(text);
         System.out.println(text);
+
+
+        String realText = huff.myTree.toString(hf.loadFromFile());
         //Testing working with files
         /*FileInputStream in = null;
         FileOutputStream out = null;

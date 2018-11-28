@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class HuffmanTree {
-    Node root;
-    String tempCode = "";
+    private Node root;
+    private String tempCode = "";
     ArrayList<codeword> codewords = new ArrayList<>();
     HuffmanTree()
     {
@@ -59,5 +59,14 @@ public class HuffmanTree {
             if (cc.c == c)
                 return codewords.indexOf(cc);
         return -1;
+    }
+
+    public String toString(ArrayList<byte[]> a)
+    {
+        String realText;
+        for(int i = 0; i< a.size(); i++)
+        {
+
+        }
     }
 }

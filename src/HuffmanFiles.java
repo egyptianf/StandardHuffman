@@ -1,21 +1,23 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.BitSet;
 
 public class HuffmanFiles {
     int pad;
     FileOutputStream out =null;
+    FileInputStream in = null;
     HuffmanFiles() throws FileNotFoundException
     {
     }
     public void setBits(String comp) throws FileNotFoundException{
-        out = new FileOutputStream("C:\\Users\\D\\Desktop\\waleeeeeeeedKolo\\src\\output.txt");
+        out = new FileOutputStream("output.txt");
         BitSet s = new BitSet(8);
         int bitsCount=0;
         for(int i =0 ; i < comp.length();i++ ){
             if(bitsCount==7){
-                
                SaveToFile(s); 
                s.clear();
                bitsCount=0;
@@ -28,11 +30,11 @@ public class HuffmanFiles {
             bitsCount++;
             
             if(i== comp.length()-1 && bitsCount < 7){
-                pad= 7  - bitsCount;
+                pad = 7  - bitsCount;
                 SaveToFile(s);
             }
-        }    
-        
+        }
+
     }
     public void SaveToFile(BitSet bits)
     {
@@ -55,5 +57,23 @@ public class HuffmanFiles {
                 ie.printStackTrace();
             }*/
         }
+    }
+    public ArrayList<byte[]> loadFromFile() throws FileNotFoundException
+    {
+        in = new FileInputStream("output.txt");
+        ArrayList<byte[]> a = new ArrayList<>();
+        byte[] ba = new byte[1];
+        try {
+            while(in.read(ba) != -1)
+            {
+                a.add(ba);
+            }
+        }catch (IOException e)
+        {
+            System.out.println("Some error happened, please try again later.");
+        }
+
+        return a;
+
     }
 }
